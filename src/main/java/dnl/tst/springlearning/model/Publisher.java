@@ -2,7 +2,9 @@ package dnl.tst.springlearning.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,7 +15,7 @@ public class Publisher {
     private String name;
     private String address;
     @OneToMany(mappedBy = "publisher")
-    private Set<Book> books = new HashSet<>();
+    private List<Book> books = new ArrayList<>();
 
     public String getName() {
         return name;
@@ -31,11 +33,14 @@ public class Publisher {
         this.address = address;
     }
 
-    public Set<Book> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(Set<Book> books) {
+    public void setBooks(List<Book> books) {
         this.books = books;
+        for (Book book : books) {
+            book.setPublisher(this);
+        }
     }
 }

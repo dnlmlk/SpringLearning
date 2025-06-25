@@ -1,7 +1,6 @@
 package dnl.tst.springlearning.model;
 
 import jakarta.persistence.*;
-import org.apache.tomcat.util.http.parser.Authorization;
 
 import java.util.HashSet;
 import java.util.Set;
