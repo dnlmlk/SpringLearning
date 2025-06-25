@@ -9,9 +9,7 @@ import dnl.tst.springlearning.repository.PublisherRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Component
 public class BookAuthorMigrator implements CommandLineRunner {
@@ -57,7 +55,8 @@ public class BookAuthorMigrator implements CommandLineRunner {
         books.add(shahname);
         Iterable<Book> savedBooks = bookRepository.saveAll(books);
 
-        nashr_cheshme.setBooks((List<Book>) savedBooks);
+        Set<Book> savedBooksSet = new HashSet<>((Collection) savedBooks);
+        nashr_cheshme.setBooks(savedBooksSet);
         publisherRepository.save(nashr_cheshme);
 
         List<Author> authors = new ArrayList<>();
