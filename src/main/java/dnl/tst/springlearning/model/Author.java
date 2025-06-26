@@ -1,10 +1,13 @@
 package dnl.tst.springlearning.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 @Entity
 public class Author {
     @Id
@@ -12,31 +15,7 @@ public class Author {
     private Long id;
     private String name;
     private int age;
-
-    public Set<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<Book> books) {
-        this.books = books;
-    }
-
     @ManyToMany(mappedBy = "authors")
+    @JsonBackReference
     private Set<Book> books = new HashSet<>();
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

@@ -1,10 +1,13 @@
 package dnl.tst.springlearning.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 @Entity
 public class Publisher {
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,32 +16,6 @@ public class Publisher {
     private String name;
     private String address;
     @OneToMany(mappedBy = "publisher")
+    @JsonBackReference
     private Set<Book> books = new HashSet<>();
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public Set<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(Set<Book> books) {
-        this.books = books;
-        for (Book book : books) {
-            book.setPublisher(this);
-        }
-    }
 }
