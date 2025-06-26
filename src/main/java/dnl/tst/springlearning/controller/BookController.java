@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class BookController {
     private final BookService bookService;
 
-    public BookController(BookService bookService) {
+    public BookController(@Qualifier("ScientificBookService") BookService bookService) {
         this.bookService = bookService;
     }
 
