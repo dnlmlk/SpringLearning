@@ -1,14 +1,16 @@
 package dnl.tst.springlearning.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Setter
+@Getter
+@ToString
 @Entity
 public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,9 +21,11 @@ public class Book {
     private String category;
     @ManyToMany
     @JoinTable(name = "book_author", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
-    @JsonManagedReference
+//    @JsonManagedReference
+    @JsonIgnore
     private Set<Author> authors = new HashSet<>();
     @ManyToOne
-    @JsonManagedReference
+//    @JsonManagedReference
+    @JsonIgnore
     private Publisher publisher;
 }

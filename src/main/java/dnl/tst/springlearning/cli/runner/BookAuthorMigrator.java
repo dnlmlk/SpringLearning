@@ -70,6 +70,7 @@ public class BookAuthorMigrator implements CommandLineRunner {
         Publisher nashr_cheshme = new Publisher();
         nashr_cheshme.setName("Nashr Cheshmeh");
         nashr_cheshme.setAddress("Tehran, Revenue St");
+        Publisher savedPublisher = publisherRepository.save(nashr_cheshme);
 
         List<Book> books = new ArrayList<>();
         books.add(golestan);
@@ -79,10 +80,6 @@ public class BookAuthorMigrator implements CommandLineRunner {
         books.add(riazi1);
         books.add(moadelat);
         Iterable<Book> savedBooks = bookRepository.saveAll(books);
-
-        Set<Book> savedBooksSet = new HashSet<>((Collection) savedBooks);
-        nashr_cheshme.setBooks(savedBooksSet);
-        publisherRepository.save(nashr_cheshme);
 
         List<Author> authors = new ArrayList<>();
         authors.add(saadi);
@@ -96,6 +93,13 @@ public class BookAuthorMigrator implements CommandLineRunner {
         riazi1.getAuthors().add(iut);
         fizik1.getAuthors().add(iut);
         moadelat.getAuthors().add(iut);
+
+        golestan.setPublisher(savedPublisher);
+        boostan.setPublisher(savedPublisher);
+        shahname.setPublisher(savedPublisher);
+        riazi1.setPublisher(savedPublisher);
+        fizik1.setPublisher(savedPublisher);
+        moadelat.setPublisher(savedPublisher);
         bookRepository.saveAll(books);
 
     }
